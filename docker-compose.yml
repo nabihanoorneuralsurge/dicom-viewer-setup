@@ -1,0 +1,32 @@
+services:
+  orthanc:
+    image: orthancteam/orthanc:24.7.3
+    container_name: orthanc
+    ports:
+      - "9043:4242"
+    volumes:
+      - ./orthanc/orthanc.json:/etc/orthanc/orthanc.json
+      - orthanc-storage:/var/lib/orthanc/db
+
+  orthanc-proxy:
+    image: nginx:alpine
+    container_name: orthanc-proxy
+    ports:
+      - "9042:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - orthanc
+
+  ohif:
+    image: ohif/app:v3.9.2
+    container_name: ohif
+    ports:
+      - "3000:80"
+    volumes:
+      - ./ohif/app-config.js:/usr/share/nginx/html/app-config.js:ro
+    depends_on:
+      - orthanc-proxy
+
+volumes:
+  orthanc-storage:
