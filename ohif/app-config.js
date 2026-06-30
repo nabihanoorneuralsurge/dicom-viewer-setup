@@ -23,7 +23,7 @@
 //   defaultDataSourceName: 'orthanc',
 // };
 window.config = {
-  routerBasename: '/',
+  routerBasename: '/ohif',
 
   extensions: [],
   modes: [],
