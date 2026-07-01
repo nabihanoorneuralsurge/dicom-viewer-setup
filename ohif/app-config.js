@@ -21,6 +21,8 @@ window.config = {
         qidoSupportsIncludeField: true,
         imageRendering: 'wadors',
         thumbnailRendering: 'wadors',
+
+          useBulkDataURI: false,
       },
     },
   ],
